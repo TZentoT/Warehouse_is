@@ -7,6 +7,7 @@ let page = undefined
 let font = null
 let frameInnerMargin = 10
 let ModelNameHeight = 15
+let lastListBlocks = []
 
 function init(width, minWidth, spaceBetweenItems, models){
     var listBlock = document.getElementById("listBlock")
@@ -91,6 +92,7 @@ function init(width, minWidth, spaceBetweenItems, models){
         renderer.setSize( elmWidth-frameInnerMargin*2, elmWidth-frameInnerMargin*2 );
 
         canvasWrap.appendChild( renderer.domElement );
+        lastListBlocks.push(frame)
         listBlock.appendChild(frame);
         renderer.render( scene, camera );
 
@@ -131,31 +133,12 @@ class ModelList extends Component {
     //setSelectedModel = (value)=>{this.setState({isSideBlockOpened: value});}    //табы выезжающей панельки
 
     componentDidMount(){
-        var manager = new THREE.LoadingManager();
-        manager.onLoad = () => { // when all resources are loaded
-            init(this.state.width, this.state.minWidth, this.state.spaceBetweenItems, this.state.models)
-
-            // render()
-            // /*
-            // let modelCreator = new ModelCreator()
-            // model = modelCreator.createCube("Пиксель", 0x885aaa, 2, 2, 2, new THREE.Vector3(-1,-1,-1))
-            // model = modelCreator.createCube("Пиксель", 0x885aaa, 1, 1, 1, new THREE.Vector3(-0.5,-0.5,-0.5))
-            // model = modelCreator.createCube("Маленький товар", 0x885aaa, 16, 16, 16, new THREE.Vector3(0,8-2,0))
-            // model = modelCreator.createCube("Большой товар", 0x885aaa, 30, 80, 36, new THREE.Vector3(0, (80/2-1), 0))
-            // model = modelCreator.createShelter("Маленькая полка", 0x885aaa, 50, 50, 50, 5, new THREE.Vector3(0, -25, -25))
-            // model = modelCreator.createShelter("Высокая полка", 0x885aaa, 50, 100, 50, 5, new THREE.Vector3(0, -25, -25))
-            // model = modelCreator.createShelter("Большая полка", 0x885aaa, 150, 100, 50, 5, new THREE.Vector3(0, -25, -25))
-            // model = modelCreator.createShelter("Широкая полка", 0x885aaa, 150, 50, 50, 5, new THREE.Vector3(0, -1, -25))
-            // */
-            // render()
+        if (lastListBlocks.length!=0) {
+            lastListBlocks.map(block=>{
+                document.getElementById("listBlock").removeChild(block)
+            })   
+            lastListBlocks = [] 
         }
-        let fontWeight = 'regular';
-        //fontWeight = 'bold';
-        let fontName = 'helvetiker' // helvetiker, optimer, gentilis, droid sans, droid serif
-        var loader = new FontLoader(manager);
-        loader.load('https://threejs.org/examples/fonts/droid/droid_serif_bold.typeface.json', function(response) {
-            font = response;
-        });
     }
 
     componentDidUpdate(){

@@ -35,6 +35,9 @@ import WarehouseISicon from './images/WarehouseISicon.png';
 import React from 'react';
 import {Routes, Route, useLocation, useNavigate} from "react-router-dom"
 import {useCookies} from 'react-cookie'
+import { Api } from "./api/storekeeperApi"
+
+var api = new Api()
 
 const mainTabsArray = [
   {title: "АРМ Кладовщика",     href:"/Storekeeper",    basicHref:"/StorekeeperAdvent/Current"},
@@ -104,6 +107,7 @@ const supportTabsArray = [
 //JSON.parse(JSON.stringify(this.state.itemList))
 
 export default function App() {
+  let warehouseTypes = undefined
   const navigate = useNavigate();
   const location = useLocation();
   const [cookies, setCookie] = useCookies(['access_token', 'refresh_token', 'accountData'])
