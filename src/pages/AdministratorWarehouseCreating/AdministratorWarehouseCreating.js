@@ -1400,6 +1400,7 @@ class AdministratorWarehouseCreating extends Component {
         scene.children.map(obj=>{
             if (obj.userData.id == id && obj.type == type) buf = obj;
         })
+        if (buf == undefined) buf = this.getSceneElmByIdAndType(id-1, type)
         return buf
     }
     

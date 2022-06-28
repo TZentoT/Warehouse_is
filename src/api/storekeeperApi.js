@@ -598,7 +598,7 @@ export class Api {
             xhr.send(null);
         })
     }
-
+    
     warehouse_all_types() {
         var xhr = new XMLHttpRequest();
 
@@ -609,13 +609,11 @@ export class Api {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     let answer = JSON.parse(this.responseText)
                     console.log(this.responseText);
-                    
                     resolve(answer)
                 }
             }
             xhr.send(null);
         })
     }
-
 }
 
