@@ -7,7 +7,7 @@ export class Api {
     getClients () {
         var xhr = new XMLHttpRequest();
         return new Promise(function(resolve, reject){
-            xhr.open("GET", host+"clients/", true);
+            xhr.open("GET", host+"clients", true);
             // xhr.setRequestHeader("Access-Control-Allow-Origin", "*")
             // xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
             // xhr.setRequestHeader("Access-Control-Max-Age", "1800");
